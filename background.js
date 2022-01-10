@@ -31,7 +31,7 @@ SPDX-License-Identifier: Apache-2.0 */
   };
 
   browser.contextMenus.create({
-    id: 'link-to-img-video-audio',
+    id: 'link-to-media',
     title: (await getMessages()).contextMenuTitle.message,
     contexts: ['image', 'video', 'audio'],
   });

@@ -1,5 +1,5 @@
 {
-  "name": "link-to-img-video-audio",
+  "name": "link-to-media",
   "version": "1.0.0",
   "description": "Link to img, video, or audio elements",
   "scripts": {
@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tomayac/link-to-img-video-audio.git"
+    "url": "git+https://github.com/tomayac/link-to-media.git"
   },
   "author": "Sam Dutton, Thomas Steiner",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/tomayac/link-to-img-video-audio/issues"
+    "url": "https://github.com/tomayac/link-to-media/issues"
   },
-  "homepage": "https://github.com/tomayac/link-to-img-video-audio#readme",
+  "homepage": "https://github.com/tomayac/link-to-media#readme",
   "devDependencies": {
     "prettier": "^2.5.1"
   }
