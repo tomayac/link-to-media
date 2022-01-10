@@ -1,0 +1,21 @@
+{
+  "name": "link-to-img-video-audio",
+  "version": "1.0.0",
+  "description": "Link to img, video, or audio elements",
+  "scripts": {
+    "fix": "npx prettier . --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomayac/link-to-img-video-audio.git"
+  },
+  "author": "Sam Dutton, Thomas Steiner",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tomayac/link-to-img-video-audio/issues"
+  },
+  "homepage": "https://github.com/tomayac/link-to-img-video-audio#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}

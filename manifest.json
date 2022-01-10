@@ -1,0 +1,10 @@
+{
+  "name": "__MSG_extName__",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "permissions": ["contextMenus"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "default_locale": "en"
+}
