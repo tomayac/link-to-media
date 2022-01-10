@@ -1,3 +1,6 @@
+/* Copyright 2022 Google LLC.
+SPDX-License-Identifier: Apache-2.0 */
+
 (async (browser) => {
   // Need to roll my own `chrome.runtime.getMessage()` replacement due to
   // https://crbug.com/1159438.

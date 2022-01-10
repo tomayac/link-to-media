@@ -1,3 +1,6 @@
+/* Copyright 2022 Google LLC.
+SPDX-License-Identifier: Apache-2.0 */
+
 (async (browser) => {
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log(request);
