@@ -2,9 +2,23 @@
   "name": "__MSG_extName__",
   "version": "1.0.0",
   "manifest_version": 3,
-  "permissions": ["contextMenus"],
+  "permissions": ["contextMenus", "tabs"],
   "background": {
     "service_worker": "background.js"
   },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*"],
+      "js": ["content.js"]
+    },
+    {
+      "matches": ["https://*/*"],
+      "js": ["polyfill/create-link.js"]
+    },
+    {
+      "matches": ["https://*/*"],
+      "js": ["polyfill/scroll-to.js"]
+    }
+  ],
   "default_locale": "en"
 }
