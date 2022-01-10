@@ -63,3 +63,5 @@ function scrollTo() {
     });
   });
 }
+
+scrollTo();
