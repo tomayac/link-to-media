@@ -1,6 +1,6 @@
 {
   "name": "__MSG_extName__",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "manifest_version": 3,
   "permissions": ["contextMenus", "tabs"],
   "background": {
@@ -20,5 +20,18 @@
       "js": ["polyfill/scroll-to.js"]
     }
   ],
-  "default_locale": "en"
+  "default_locale": "en",
+   "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "32": "/images/icons/icon32.png",
+      "48": "/images/icons/icon48.png",
+      "128": "/images/icons/icon128.png"
+    }
+  },
+  "icons": {
+    "32": "/images/icons/icon32.png",
+    "48": "/images/icons/icon48.png",
+    "128": "/images/icons/icon128.png"
+  }
 }

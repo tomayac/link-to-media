@@ -1,8 +1,8 @@
 {
   "extName": {
-    "message": "Link to <img>, <video>, or <audio>"
+    "message": "Link to media"
   },
   "contextMenuTitle": {
-    "message": "Link to <img>, <video>, or <audio>"
+    "message": "Link to media"
   }
 }
