@@ -14,5 +14,5 @@ function createLink(element) {
   return new URL(
     `#:~:selector(type=CssSelector,value=${selector})`,
     location.href,
-  );
+  ).toString();
 }
