@@ -4,7 +4,7 @@ function createSelector(element) {
   }
   if (element.src) {
     const tag = element.tagName.toLowerCase();
-    return `${location.href}${BOILERPLATE}${tag}[src="${element.src.replace(/["\\]/g, '\\$&')}"])`;
+    return `${tag}[src="${CSS.escape(element.src)}"]`;
   }
   throw new Error('unsupported element');
 }
