@@ -4,7 +4,7 @@ function createSelector(element) {
   }
   if (element.src) {
     const tag = element.tagName.toLowerCase();
-    return `${tag}[src="${CSS.escape(element.src)}"]`;
+    return `${tag}[src="${element.src.replace(/["\\]/g, '\\$&')}"]`;
   }
   throw new Error('unsupported element');
 }
