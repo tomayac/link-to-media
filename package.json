@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Link to img, video, or audio elements",
   "scripts": {
-    "fix": "npx prettier . --write"
+    "fix": "npx prettier . --write",
+    "prepare": "npm run fix"
   },
   "repository": {
     "type": "git",
