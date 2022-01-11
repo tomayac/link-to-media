@@ -18,8 +18,6 @@ SPDX-License-Identifier: Apache-2.0 */
     loadMessages('en'),
   );
 
-  console.log(messages);
-
   browser.contextMenus.create({
     id: 'link-to-media',
     title: messages.contextMenuTitle.message,
@@ -28,7 +26,7 @@ SPDX-License-Identifier: Apache-2.0 */
 
   browser.contextMenus.onClicked.addListener((info, tab) => {
     const { mediaType, srcUrl } = info;
-    console.log(mediaType, srcUrl, tab.id);
+    console.log('Activated on', mediaType, srcUrl);
     browser.tabs.sendMessage(
       tab.id,
       {
