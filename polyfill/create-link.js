@@ -5,6 +5,6 @@ function createLink(element) {
     return `${location.href}${BOILERPLATE}#${element.id})`;
   }
   if (element.src) {
-    return `${location.href}${BOILERPLATE}img[src="${element.src}"])`;
+    return `${location.href}${BOILERPLATE}${element.nodeName.toLowerCase()}[src="${element.src}"])`;
   }
 }

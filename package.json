@@ -4,7 +4,8 @@
   "description": "Link to img, video, or audio elements",
   "scripts": {
     "fix": "npx prettier . --write",
-    "prepare": "npm run fix"
+    "prepare": "npm run fix",
+    "start": "npx http-server docs/"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/tomayac/link-to-media#readme",
   "devDependencies": {
+    "http-server": "^14.1.0",
     "prettier": "^2.5.1"
   }
 }
