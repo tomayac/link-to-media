@@ -21,7 +21,7 @@
     }
   ],
   "default_locale": "en",
-   "action": {
+  "action": {
     "default_popup": "index.html",
     "default_icon": {
       "32": "/images/icons/icon32.png",
