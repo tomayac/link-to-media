@@ -10,10 +10,10 @@ SPDX-License-Identifier: Apache-2.0 */
     );
   }
 
-  const language = browser.i18n.getUILanguage();
-  const messages = await loadMessages(language).catch(async (_) => {
-    await loadMessages('en');
-  });
+  const language = browser.i18n.getUILanguage().split('-', 1)[0];
+  const messages = await loadMessages(language).catch((_) =>
+    loadMessages('en'),
+  );
 
   await browser.contextMenus.create({
     id: 'link-to-media',
