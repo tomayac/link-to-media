@@ -1,9 +1,29 @@
+const SUPPORTED_ELEMENTS = ['img', 'video', 'audio'];
+
 // Escapes `"` and `\` in attribute values.
 function escapeAttributeValue(selector) {
   return selector.replace(/["\\]/g, '\\$&');
 }
 
+function traverseElementHierarchy(element) {
+  // On https://interactive-examples.mdn.mozilla.net/pages/tabbed/picture.html, the
+  // context menu is triggered on `<shadow-output>`, a custom element. We need to
+  // descend into the shadow root until we find any of `img`, `video`, or `audio`.
+  if (
+    !SUPPORTED_ELEMENTS.includes(element.tagName.toLowerCase()) &&
+    (element.hasChildNodes() || element.shadowRoot.hasChildNodes())
+  ) {
+    element = (element.shadowRoot ? element.shadowRoot : element).querySelector(
+      SUPPORTED_ELEMENTS.join(','),
+    );
+    return traverseElementHierarchy(element);
+  }
+  return element;
+}
+
 function createSelector(element) {
+  // For custom elements, descend into the shadow root.
+  element = traverseElementHierarchy(element);
   // Case: `<foo id>`
   if (element.id) {
     return `#${CSS.escape(element.id)}`;
