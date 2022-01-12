@@ -2,13 +2,25 @@
 SPDX-License-Identifier: Apache-2.0 */
 
 (async (browser) => {
+  const SUPPORTED_ELEMENTS = ['img', 'video', 'audio'];
+
   let elementAtPoint = null;
+  let lastElement = null;
 
   document.addEventListener('contextmenu', (e) => {
     elementAtPoint = null;
     const { x, y } = e;
     elementAtPoint = document.elementFromPoint(x, y);
     console.log('Activated on', elementAtPoint);
+  });
+
+  document.addEventListener('pointermove', (e) => {
+    const tagName = e.target.tagName.toLowerCase();
+    if (!SUPPORTED_ELEMENTS.includes(tagName) || tagName === lastElement) {
+      return;
+    }
+    browser.runtime.sendMessage({element: tagName});
+    lastElement = tagName;
   });
 
   browser.runtime.onMessage.addListener(

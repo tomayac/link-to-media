@@ -15,11 +15,21 @@ SPDX-License-Identifier: Apache-2.0 */
     loadMessages('en'),
   );
 
-  await browser.contextMenus.create({
+  browser.contextMenus.create({
     id: 'link-to-media',
-    title: messages.contextMenuTitle.message,
+    title: 'N/A',
     contexts: ['image', 'video', 'audio'],
   });
+
+  browser.runtime.onMessage.addListener(async (request) => {
+    console.log(request)
+    if (request.element) {
+      browser.contextMenus.update('link-to-media', {
+        title: messages.contextMenuTitle.message.replace('$MEDIA_TYPE', messages[request.element].message),
+        contexts: ['image', 'video', 'audio'],
+      });
+    }
+  })
 
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     const { mediaType, srcUrl } = info;

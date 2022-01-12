@@ -3,6 +3,20 @@
     "message": "Посилання на медіа"
   },
   "contextMenuTitle": {
-    "message": "Скопіювати посилання для підсвітки цього елементу"
+    "message": "Скопіювати посилання для підсвітки цього $MEDIA_TYPE",
+    "placeholders": {
+      "media_type": {
+        "content": "$1"
+      }
+    }
+  },
+  "video": {
+    "message": "відео"
+  },
+  "audio": {
+    "message": "аудіо"
+  },
+  "img": {
+    "message": "зображення"
   }
 }

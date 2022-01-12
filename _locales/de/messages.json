@@ -1,9 +1,9 @@
 {
   "extName": {
-    "message": "Link to media"
+    "message": "Link zu Medien"
   },
   "contextMenuTitle": {
-    "message": "Copy link to highlight this $MEDIA_TYPE",
+    "message": "Kopiere Link zu diesem $MEDIA_TYPE",
     "placeholders": {
       "media_type": {
         "content": "$1"
@@ -11,12 +11,12 @@
     }
   },
   "video": {
-    "message": "video"
+    "message": "Video"
   },
   "audio": {
-    "message": "audio"
+    "message": "Audio"
   },
   "img": {
-    "message": "image"
+    "message": "Bild"
   }
 }
