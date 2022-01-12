@@ -2,15 +2,11 @@
   "name": "__MSG_extName__",
   "version": "0.0.1",
   "manifest_version": 3,
-  "permissions": ["contextMenus", "tabs"],
+  "permissions": ["contextMenus", "clipboardWrite"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
-    {
-      "matches": ["https://*/*"],
-      "js": ["content.js"]
-    },
     {
       "matches": ["https://*/*"],
       "js": ["polyfill/create-link.js"]
@@ -18,6 +14,10 @@
     {
       "matches": ["https://*/*"],
       "js": ["polyfill/scroll-to.js"]
+    },
+    {
+      "matches": ["https://*/*"],
+      "js": ["content.js"]
     }
   ],
   "default_locale": "en",

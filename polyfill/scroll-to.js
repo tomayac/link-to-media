@@ -16,7 +16,7 @@
 
 // Via https://github.com/flackr/scroll-to-extension/blob/main/src/scroll-to.js.
 function scrollTo() {
-  const regex = /[^#]*#.*:~:selector\(type=CssSelector,value=(.*)\)$/;
+  const regExp = /[^#]*#.*:~:selector\(type=CssSelector,value=(.*)\)$/;
   // Scroll to image only supports a simple or compound selector selecting on
   // type, id, class and attribute selectors with a specific list of allowed
   // attribute names to select on. See
@@ -25,7 +25,7 @@ function scrollTo() {
   const validSelector =
     /^([#.]?[-_a-zA-Z0-9]+(\[ *(alt|href|poster|src|srcset|style) *([$^*|~]?= *("[^"]*"|'[^']*'|[^\] ]*))? *\])*)+$/;
   const entry = performance.getEntriesByType('navigation')[0];
-  const match = entry.name.match(regex);
+  const match = entry.name.match(regExp);
   if (!match || match.length !== 2) return;
   let matchStr = decodeURIComponent(match[1]).trim();
   if (!matchStr.match(validSelector)) {
@@ -37,7 +37,7 @@ function scrollTo() {
   }
   const elem = document.querySelector(matchStr);
   if (!elem) {
-    console.error('Failed to select element from selector: ' + matchStr);
+    console.error('Failed to select element from selector:', matchStr);
     return;
   }
   const previousOutline = elem.style.outline;
@@ -63,5 +63,3 @@ function scrollTo() {
     });
   });
 }
-
-scrollTo();

@@ -1,3 +1,8 @@
+// Escapes `"` and `\` in attribute values.
+function escapeAttributeValue(selector) {
+  return selector.replace(/["\\]/g, '\\$&');
+}
+
 function createSelector(element) {
   // `<foo id>`
   if (element.id) {
@@ -6,16 +11,16 @@ function createSelector(element) {
   const tag = element.tagName.toLowerCase();
   // `<foo src>`
   if (element.src) {
-    return `${tag}[src="${element.src.replace(/["\\]/g, '\\$&')}"]`;
+    return `${tag}[src="${escapeAttributeValue(element.src)}"]`;
   }
   const childWithSrcAttribute = element.querySelector('[src]');
   // `<foo><bar src /></foo>`
   if (childWithSrcAttribute) {
-    // @ToDo: Need to fix this and understand how `:has` works
-    // (https://www.smashingmagazine.com/2021/06/has-native-css-parent-selector/).
-    return `${tag}:has([src=${childWithSrcAttribute.src.replace(/["\\]/g, '\\$&')}])`;
+    return `${tag}:has([src="${escapeAttributeValue(
+      childWithSrcAttribute.src,
+    )}"])`;
   }
-  throw new Error('unsupported element');
+  throw new Error('Unsupported element');
 }
 
 function isUnique(selector) {
