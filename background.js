@@ -18,6 +18,14 @@ SPDX-License-Identifier: Apache-2.0 */
     await loadMessages('en');
   });
 
+  function errorOccurred() {
+    if (browser.runtime.lastError) {
+      console.error(browser.runtime.lastError);
+      return true;
+    }
+    return false;
+  }
+
   browser.contextMenus.create(
     {
       id: 'link-to-media',
@@ -25,11 +33,8 @@ SPDX-License-Identifier: Apache-2.0 */
       contexts: ['image', 'video', 'audio'],
     },
     () => {
-      if (browser.runtime.lastError) {
-        console.log(
-          'Error creating context menu item:',
-          browser.runtime.lastError,
-        );
+      if (errorOccurred()) {
+        return;
       }
     },
   );
@@ -46,6 +51,9 @@ SPDX-License-Identifier: Apache-2.0 */
         },
       },
       (response) => {
+        if (errorOccurred()) {
+          return;
+        }
         console.log(response);
       },
     );
