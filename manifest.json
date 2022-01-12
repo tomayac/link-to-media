@@ -8,14 +8,30 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*/*"],
-      "js": ["polyfill/create-link.js"]
-    },
-    {
+      "match_about_blank": false,
+      "run_at": "document_end",
+      "all_frames": false,
       "matches": ["https://*/*"],
       "js": ["polyfill/scroll-to.js"]
     },
     {
+      "match_about_blank": false,
+      "run_at": "document_end",
+      "all_frames": false,
+      "matches": ["https://*/*"],
+      "js": ["polyfill/run-scroll-to.js"]
+    },
+    {
+      "match_about_blank": true,
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": ["https://*/*"],
+      "js": ["polyfill/create-link.js"]
+    },
+    {
+      "match_about_blank": true,
+      "run_at": "document_end",
+      "all_frames": true,
       "matches": ["https://*/*"],
       "js": ["content.js"]
     }

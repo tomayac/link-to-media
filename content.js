@@ -2,9 +2,6 @@
 SPDX-License-Identifier: Apache-2.0 */
 
 (async (browser) => {
-  // This comes from the polyfill.
-  scrollTo();
-
   let elementAtPoint = null;
 
   document.addEventListener('contextmenu', (e) => {
