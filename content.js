@@ -2,6 +2,7 @@
 SPDX-License-Identifier: Apache-2.0 */
 
 (async (browser) => {
+  // This comes from the polyfill.
   scrollTo();
 
   let elementAtPoint = null;
@@ -29,6 +30,7 @@ SPDX-License-Identifier: Apache-2.0 */
         console.log('Created link', link);
         try {
           await copyToClipboard(link);
+          await highlightElement(elementAtPoint);
         } catch (err) {
           console.error(err.name, err.message);
         }
@@ -36,6 +38,14 @@ SPDX-License-Identifier: Apache-2.0 */
       }
     },
   );
+
+  const highlightElement = (element) => {
+    const previousOutline = element.style.outline;
+    element.style.outline = 'Highlight solid 3px';
+    setTimeout(() => {
+      element.style.outline = previousOutline;
+    }, 1000);
+  };
 
   const copyToClipboard = async (text) => {
     // Try to use the Async Clipboard API with fallback to the legacy API.

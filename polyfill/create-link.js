@@ -4,20 +4,23 @@ function escapeAttributeValue(selector) {
 }
 
 function createSelector(element) {
-  // `<foo id>`
+  // Case: `<foo id>`
   if (element.id) {
     return `#${CSS.escape(element.id)}`;
   }
   const tag = element.tagName.toLowerCase();
-  // `<foo src>`
-  if (element.src) {
-    return `${tag}[src="${escapeAttributeValue(element.src)}"]`;
+  // We want the `src` as marked up, not the resolved URL.
+  const src = element.getAttribute('src');
+  // Case: `<foo src>`
+  if (src) {
+    return `${tag}[src="${escapeAttributeValue(src)}"]`;
   }
   const childWithSrcAttribute = element.querySelector('[src]');
-  // `<foo><bar src /></foo>`
+  // Case: `<foo><bar src /></foo>`
   if (childWithSrcAttribute) {
     return `${tag}:has([src="${escapeAttributeValue(
-      childWithSrcAttribute.src,
+      // We want the `src` as marked up, not the resolved URL.
+      childWithSrcAttribute.getAttribute('src'),
     )}"])`;
   }
   throw new Error('Unsupported element');
