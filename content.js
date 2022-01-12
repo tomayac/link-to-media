@@ -31,9 +31,12 @@ SPDX-License-Identifier: Apache-2.0 */
 
   const highlightElement = (element) => {
     const previousOutline = element.style.outline;
+    const previousOutlineOffset = element.style.outlineOffset;
     element.style.outline = 'Highlight solid 3px';
+    element.style.outlineOffset = '-3px';
     setTimeout(() => {
       element.style.outline = previousOutline;
+      element.style.outlineOffset = previousOutlineOffset;
     }, 1000);
   };
 
