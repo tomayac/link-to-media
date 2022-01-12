@@ -4,7 +4,7 @@ SPDX-License-Identifier: Apache-2.0 */
 (async (browser) => {
   // Need to roll my own `chrome.runtime.getMessage()` replacement due to
   // https://crbug.com/1159438.
-  function loadMessages(language) {
+  async function loadMessages(language) {
     return fetch(`_locales/${language}/messages.json`).then((response) =>
       response.json(),
     );
@@ -14,9 +14,9 @@ SPDX-License-Identifier: Apache-2.0 */
     browser.i18n.getAcceptLanguages(resolve),
   );
   const language = languages[0].split('-')[0];
-  const messages = await loadMessages(language).catch((_) =>
-    loadMessages('en'),
-  );
+  const messages = await loadMessages(language).catch(async (_) => {
+    await loadMessages('en');
+  });
 
   browser.contextMenus.create({
     id: 'link-to-media',

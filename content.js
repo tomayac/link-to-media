@@ -8,7 +8,6 @@ SPDX-License-Identifier: Apache-2.0 */
   let elementAtPoint = null;
 
   document.addEventListener('contextmenu', (e) => {
-    console.log('contextmenu', e);
     const { x, y } = e;
     elementAtPoint = document.elementFromPoint(x, y);
     console.log('Activated on', elementAtPoint);
@@ -16,25 +15,16 @@ SPDX-License-Identifier: Apache-2.0 */
 
   browser.runtime.onMessage.addListener(
     async (request, sender, sendResponse) => {
-      console.log(request);
       if (request.selection) {
-        let { mediaType } = request.selection;
-        if (mediaType === 'image') {
-          mediaType = 'img';
-        }
-        // Basic sanity check to make sure the right element is selected.
-        if (mediaType !== elementAtPoint.tagName.toLowerCase()) {
-          return;
-        }
-        const link = createLink(elementAtPoint);
-        console.log('Created link', link);
         try {
+          const link = createLink(elementAtPoint);
+          console.log('Created link', link);
           await copyToClipboard(link);
           await highlightElement(elementAtPoint);
+          sendResponse(link);
         } catch (err) {
           console.error(err.name, err.message);
         }
-        sendResponse(link);
       }
     },
   );

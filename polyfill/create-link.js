@@ -32,10 +32,10 @@ function isUnique(selector) {
 
 function createLink(element) {
   const selector = createSelector(element);
+  console.log('Selector is unique', isUnique(selector));
   if (isUnique(selector)) {
     // @ToDo: Only proceed if the selector is unique. Otherwise, find a new
     // selector.
-    console.log('Selector is unique', selector);
   }
   return new URL(
     `#:~:selector(type=CssSelector,value=${selector})`,
