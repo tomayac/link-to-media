@@ -5,6 +5,7 @@ SPDX-License-Identifier: Apache-2.0 */
   let elementAtPoint = null;
 
   document.addEventListener('contextmenu', (e) => {
+    elementAtPoint = null;
     const { x, y } = e;
     elementAtPoint = document.elementFromPoint(x, y);
     console.log('Activated on', elementAtPoint);
