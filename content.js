@@ -15,7 +15,7 @@ SPDX-License-Identifier: Apache-2.0 */
 
   browser.runtime.onMessage.addListener(
     async (request, sender, sendResponse) => {
-      if (request.selection) {
+      if (request.selection && elementAtPoint) {
         try {
           const link = createLink(elementAtPoint);
           console.log('Created link', link);
