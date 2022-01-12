@@ -45,24 +45,48 @@ async function scrollTo() {
     );
     return;
   }
-  const elem = document.querySelector(matchStr);
-  if (!elem) {
-    console.error('Failed to select element from selector:', matchStr);
-    return;
-  }
-  const previousOutline = elem.style.outline;
-  elem.style.outline = 'Highlight solid 3px';
   // Need to wait for the load event to ensure the scroll does not get
   // undone by the browsers anchor link scroll behavior.
   await waitForWindowEvent('load');
-  // Wait until the second frame after the load to scroll the element into
-  // view. Scrolling immediately seems to sometimes fail.
-  await waitForAnimationFrame();
-  await waitForAnimationFrame();
+  let elem = document.querySelector(matchStr);
+  if (!elem) {
+    let observer;
+    try {
+      elem = await new Promise((resolve, reject) => {
+        observer = new MutationObserver((mutations) => {
+          for (let mutation of mutations) {
+            for (let node of mutation.addedNodes) {
+              if (
+                node.nodeType === Node.ELEMENT_NODE &&
+                node.matches(matchStr)
+              ) {
+                return resolve(node);
+              }
+            }
+          }
+        });
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+        });
+        setTimeout(
+          () =>
+            reject(
+              new Error('Failed to select element from selector ' + matchStr),
+            ),
+          1000,
+        );
+      });
+    } finally {
+      observer?.disconnect();
+    }
+  }
+  const previousOutline = elem.style.outline;
+  elem.style.outline = 'Highlight solid 3px';
   elem.scrollIntoView();
-  await waitForAnimationFrame();
   // Wait until the element is scrolled into view to add a listener to
   // cancel the highlight.
+  await waitForAnimationFrame();
   await waitForWindowEvent('scroll');
   elem.style.outline = previousOutline;
 }
