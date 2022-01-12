@@ -21,6 +21,14 @@ function traverseElementHierarchy(element) {
   return element;
 }
 
+// Attributes to use in selectors in order of priority until we get a
+// unique selector.
+const ALLOWED_ATTRS = ['src', 'href', 'poster', 'srcset', 'alt', 'style'];
+
+function isUnique(selector) {
+  return document.querySelectorAll(selector).length === 1;
+}
+
 function createSelector(element) {
   // For custom elements, descend into the shadow root.
   element = traverseElementHierarchy(element);
@@ -28,12 +36,15 @@ function createSelector(element) {
   if (element.id) {
     return `#${CSS.escape(element.id)}`;
   }
-  const tag = element.tagName.toLowerCase();
-  // We want the `src` as marked up, not the resolved URL.
-  const src = element.getAttribute('src');
-  // Case: `<foo src>`
-  if (src) {
-    return `${tag}[src="${escapeAttributeValue(src)}"]`;
+  let selector = element.tagName.toLowerCase();
+  for (let attrName of ['src', 'href', 'poster', 'alt', 'srcset', 'style']) {
+    const attrValue = element.getAttribute(attrName);
+    if (attrValue) {
+      selector += `[${attrName}="${escapeAttributeValue(attrValue)}"]`;
+      if (isUnique(selector)) {
+        return selector;
+      }
+    }
   }
   const childWithSrcAttribute = element.querySelector('[src]');
   // Case: `<foo><bar src /></foo>`
@@ -43,20 +54,12 @@ function createSelector(element) {
       childWithSrcAttribute.getAttribute('src'),
     )}"])`;
   }
-  throw new Error('Unsupported element');
-}
-
-function isUnique(selector) {
-  return document.querySelectorAll(selector).length === 1;
+  throw new Error("Couldn't generate a unique selector");
 }
 
 function createLink(element) {
   const selector = createSelector(element);
   console.log('Selector is unique', isUnique(selector));
-  if (isUnique(selector)) {
-    // @ToDo: Only proceed if the selector is unique. Otherwise, find a new
-    // selector.
-  }
   return new URL(
     `#:~:selector(type=CssSelector,value=${selector})`,
     location.href,
