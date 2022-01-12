@@ -18,44 +18,21 @@ SPDX-License-Identifier: Apache-2.0 */
     await loadMessages('en');
   });
 
-  function errorOccurred() {
-    if (browser.runtime.lastError) {
-      console.error(browser.runtime.lastError);
-      return true;
-    }
-    return false;
-  }
+  await browser.contextMenus.create({
+    id: 'link-to-media',
+    title: messages.contextMenuTitle.message,
+    contexts: ['image', 'video', 'audio'],
+  });
 
-  browser.contextMenus.create(
-    {
-      id: 'link-to-media',
-      title: messages.contextMenuTitle.message,
-      contexts: ['image', 'video', 'audio'],
-    },
-    () => {
-      if (errorOccurred()) {
-        return;
-      }
-    },
-  );
-
-  browser.contextMenus.onClicked.addListener((info, tab) => {
+  browser.contextMenus.onClicked.addListener(async (info, tab) => {
     const { mediaType, srcUrl } = info;
     console.log('Activated on', mediaType, srcUrl);
-    browser.tabs.sendMessage(
-      tab.id,
-      {
-        selection: {
-          mediaType,
-          srcUrl,
-        },
+    const response = await browser.tabs.sendMessage(tab.id, {
+      selection: {
+        mediaType,
+        srcUrl,
       },
-      (response) => {
-        if (errorOccurred()) {
-          return;
-        }
-        console.log(response);
-      },
-    );
+    });
+    console.log(response);
   });
-})(chrome || browser);
+})(chrome || browser).catch(console.error);
