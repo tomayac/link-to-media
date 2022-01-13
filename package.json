@@ -1,14 +1,15 @@
 {
   "name": "link-to-media",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Link to img, video, or audio elements",
   "type": "module",
   "files": [
-    "./polyfill/*"
+    "polyfill/"
   ],
   "browser": "./polyfill/index.min.js",
   "exports": {
-    ".": "./polyfill/index.min.js"
+    ".": "./polyfill/index.min.js",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "fix": "npx prettier . --write",
