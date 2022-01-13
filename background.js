@@ -22,14 +22,17 @@ SPDX-License-Identifier: Apache-2.0 */
   });
 
   browser.runtime.onMessage.addListener(async (request) => {
-    console.log(request)
+    console.log(request);
     if (request.element) {
       browser.contextMenus.update('link-to-media', {
-        title: messages.contextMenuTitle.message.replace('$MEDIA_TYPE', messages[request.element].message),
+        title: messages.contextMenuTitle.message.replace(
+          '$MEDIA_TYPE',
+          messages[request.element].message,
+        ),
         contexts: ['image', 'video', 'audio'],
       });
     }
-  })
+  });
 
   browser.contextMenus.onClicked.addListener(async (info, tab) => {
     const { mediaType, srcUrl } = info;

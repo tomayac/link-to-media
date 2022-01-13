@@ -90,3 +90,5 @@ async function scrollTo() {
   await waitForWindowEvent('scroll');
   elem.style.outline = previousOutline;
 }
+
+export default scrollTo;
