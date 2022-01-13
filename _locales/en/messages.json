@@ -3,7 +3,7 @@
     "message": "Link to media"
   },
   "contextMenuTitle": {
-    "message": "Copy link to highlight this $MEDIA_TYPE",
+    "message": "Copy deeplink to this $MEDIA_TYPE",
     "placeholders": {
       "media_type": {
         "content": "$1"
