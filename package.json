@@ -1,10 +1,19 @@
 {
   "name": "link-to-media",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Link to img, video, or audio elements",
+  "type": "module",
+  "files": [
+    "./polyfill/*"
+  ],
+  "browser": "./polyfill/index.min.js",
+  "exports": {
+    ".": "./polyfill/index.min.js"
+  },
   "scripts": {
     "fix": "npx prettier . --write",
-    "prepare": "npm run fix",
+    "prepare": "npm run fix && npm run build",
+    "build": "esbuild polyfill/index.js --bundle --minify --format=esm --outfile=polyfill/index.min.js",
     "start": "npx http-server docs/"
   },
   "repository": {
@@ -22,6 +31,7 @@
   },
   "homepage": "https://github.com/tomayac/link-to-media#readme",
   "devDependencies": {
+    "esbuild": "^0.14.11",
     "http-server": "^14.1.0",
     "prettier": "^2.5.1"
   }
