@@ -35,6 +35,9 @@ async function scrollTo() {
   const validSelector =
     /^([#.]?[-_a-zA-Z0-9]+(\[ *(alt|href|poster|src|srcset|style) *([$^*|~]?= *("[^"]*"|'[^']*'|[^\] ]*))? *\])*)+$/;
   const entry = performance.getEntriesByType('navigation')[0];
+  if (!entry) {
+    return;
+  }
   const match = entry.name.match(regExp);
   if (!match || match.length !== 2) return;
   let matchStr = decodeURIComponent(match[1]).trim();
